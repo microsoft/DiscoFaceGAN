@@ -49,21 +49,15 @@ We can also achieve expression transfer of real images.
 <p align="center"> 
 <img src="/images/expression.png" width="600">
 </p>
+##
+The training code of our model are mainly borrowed from [StyleGAN](https://github.com/NVlabs/stylegan), although our method can be applied to any form of GANs.
 
-## Requirements
-
-- Only Linux is supported.
+## Testing requirements
 - Python 3.6. We recommend Anaconda3 with numpy 1.14.3 or newer.
 - Tensorflow 1.12 with GPU support.
 - CUDA toolkit 9.0 or newer, cuDNN 7.3.1 or newer.
-- One or more high-end NVIDIA GPUs. We recommend using at least 4 Tesla P100 GPUs for training.
-- [Basel Face Model 2009 (BFM09)](https://faces.dmi.unibas.ch/bfm/main.php?nav=1-0&id=basel_face_model). 
-- [Expression Basis](https://github.com/Juyong/3DFace). The original BFM09 model does not handle expression variations so extra expression basis are needed. 
-- [tf_mesh_renderer](https://github.com/google/tf_mesh_renderer). We use the tool to generate synthetic face images.
-- [Facenet](https://github.com/davidsandberg/facenet). We use the open source face recognition network to extract identity features.
-- [3D face reconstruction network](https://github.com/microsoft/Deep3DFaceReconstruction). We use the network to extract identity, expression, lighting, and pose coefficients.
 
-## Using pre-trained network
+## Testing with pre-trained network
 1. Clone the repository:
 
 ```
@@ -86,17 +80,33 @@ python generate_images.py --factor 2
 python generate_images.py --factor 3
 ```
 
+## Training requirements
+
+- Only Linux is supported.
+- Python 3.6. We recommend Anaconda3 with numpy 1.14.3 or newer.
+- Tensorflow 1.12 with GPU support.
+- CUDA toolkit 9.0 or newer, cuDNN 7.3.1 or newer.
+- One or more high-end NVIDIA GPUs. We recommend using at least 4 Tesla P100 GPUs for training.
+- [Basel Face Model 2009 (BFM09)](https://faces.dmi.unibas.ch/bfm/main.php?nav=1-0&id=basel_face_model). 
+- [Expression Basis](https://github.com/Juyong/3DFace) provided by Guo et al.. The original BFM09 model does not handle expression variations so extra expression basis are needed. 
+- [tf_mesh_renderer](https://github.com/google/tf_mesh_renderer) provided by Genova et al.. We use the tool to render synthetic face images during training. We recommend using its [older version](https://github.com/google/tf_mesh_renderer/tree/ba27ea1798f6ee8d03ddbc52f42ab4241f9328bb) because we find its latest version unstable during our training process.
+- [Facenet](https://github.com/davidsandberg/facenet) provided by 
+Sandberg et al.. In our paper, we use a face recognition network trained with in-house face data which cannot be made publicly available due to the company policies. To make our work reproducible, we recommend using this alternative face recognition model. We use the version [20170512-110547](https://github.com/davidsandberg/facenet/blob/529c3b0b5fc8da4e0f48d2818906120f2e5687e6/README.md) trained on MS-Celeb-1M. Training process has been tested with the new model to ensure a comparable result.
+- [3D face reconstruction network](https://github.com/microsoft/Deep3DFaceReconstruction). We use the network to extract identity, expression, lighting, and pose coefficients.
+- [Face parsing network](https://arxiv.org/abs/1906.01342) provided by Lin et al.. We use the network to obtain hair segmentation masks during training.
+
+
 ## Training preparation
 
 1. Download the Basel Face Model. Due to the license agreement of Basel Face Model, you have to submit an application on its [home page](https://faces.dmi.unibas.ch/bfm/main.php?nav=1-2&id=downloads). After getting the access to BFM data, download "01_MorphableModel.mat" and put it in "./renderer/BFM face model".
-2. Download the Expression Basis provided by [Guo et al.](https://github.com/Juyong/3DFace). You can find a link named "CoarseData" in the first row of Introduction part in their repository. Download and unzip the Coarse_Dataset.zip. Put "Exp_Pca.bin" in "./renderer/BFM face model".
-3. Install tf_mesh_renderer. We recommend using its [older version](https://github.com/google/tf_mesh_renderer/tree/ba27ea1798f6ee8d03ddbc52f42ab4241f9328bb) because we find its latest version unstable during our training process. For convenience, we provide a [pre-compiled file](https://drive.google.com/file/d/1VlPXvrvH_HYUf9ePlkvL2E93a1aK4eUg/view?usp=sharing) of the library under tensorflow 1.12. Download the file and put it in "./renderer".
-4. Download the [pre-trained weights](https://drive.google.com/file/d/0B5MzpY9kBtDVZ2RpVDYwWmxoSUk/edit) of Facenet, unzip it and put all files in "./training/pretrained_weights/id_net".
+2. Download the [Expression Basis](https://github.com/Juyong/3DFace). You can find a link named "CoarseData" in the first row of Introduction part in their repository. Download and unzip the Coarse_Dataset.zip. Put "Exp_Pca.bin" in "./renderer/BFM face model".
+3. Install tf_mesh_renderer. For convenience, we provide a [pre-compiled file](https://drive.google.com/file/d/1VlPXvrvH_HYUf9ePlkvL2E93a1aK4eUg/view?usp=sharing) of the library under tensorflow 1.12. Download the file and put it in "./renderer".
+4. Download the [pre-trained weights](https://drive.google.com/file/d/0B5MzpY9kBtDVZ2RpVDYwWmxoSUk/edit) of Facenet provided by Sandberg et al., unzip it and put all files in "./training/pretrained_weights/id_net".
 5. Download the [pre-trained weights](https://drive.google.com/file/d/176LCdUDxAj7T2awQ5knPMPawq5Q2RUWM/view?usp=sharing) of 3D face reconstruction network, unzip it and put all files in "./training/pretrained_weights/recon_net".
-6. Download the [pre-trained weights](https://drive.google.com/file/d/1YkvI_B-cPNo1NhTjiEk8O8FVnVpIypNd/view?usp=sharing) of face parser, unzip it and put all files in "./training/pretrained_weights/parsing_net".
+6. Download the [pre-trained weights](https://drive.google.com/file/d/1YkvI_B-cPNo1NhTjiEk8O8FVnVpIypNd/view?usp=sharing) of face parser provided by Lin et al., unzip it and put all files in "./training/pretrained_weights/parsing_net".
 
 ## Data pre-processing
-1. Download [FFHQ dataset](https://github.com/NVlabs/ffhq-dataset). Detect 5 facial landmarks for all images. We recommend using [dlib](http://dlib.net/) or [MTCNN](https://github.com/ipazc/mtcnn). Save all images in <raw_image_path> and corresponding landmarks in <raw_lm_path>. Note that a image and its detected landmark file should have same name.
+1. Download [FFHQ dataset](https://github.com/NVlabs/ffhq-dataset). Detect 5 facial landmarks for all images. We recommend using [dlib](http://dlib.net/) or [MTCNN](https://github.com/ipazc/mtcnn). Save all images in <raw_image_path> and corresponding landmarks in <raw_lm_path>. Note that an image and its detected landmark file should have same name.
 2. Align images and extract coefficients for VAE and GAN training:
 
 ```
@@ -165,3 +175,6 @@ Please cite the following paper if this model helps your research:
 	    booktitle={IEEE Computer Vision and Pattern Recognition},
 	    year={2020}
 	}
+
+##
+The real face images on this page are from the public FFHQ dataset released under Creative Commons BY-NC-SA 4.0 license. Detailed information can be found on its [website](https://github.com/NVlabs/ffhq-dataset).
