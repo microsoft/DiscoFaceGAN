@@ -49,6 +49,7 @@ We can also achieve expression transfer of real images.
 <p align="center"> 
 <img src="/images/expression.png" width="600">
 </p>
+
 ##
 The training code of our model are mainly borrowed from [StyleGAN](https://github.com/NVlabs/stylegan), although our method can be applied to any form of GANs.
 
