@@ -16,7 +16,7 @@ from preprocess.preprocess_utils import *
 # Pretrained face reconstruction model from Deng et al. 19,
 # https://github.com/microsoft/Deep3DFaceReconstruction
 model_continue_path = 'training/pretrained_weights/recon_net'
-R_net_weights = os.path.join(model_continue_path,'FaceReconModel.ckpt')
+R_net_weights = os.path.join(model_continue_path,'FaceReconModel')
 config = tf.ConfigProto()
 config.gpu_options.visible_device_list = '0'
 

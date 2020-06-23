@@ -67,7 +67,7 @@ def restore_weights_and_initialize(train_stage_args):
     saver_rot = tf.train.Saver(var_list = var_rot_list,max_to_keep = 100)
     
 
-    saver_resnet.restore(tf.get_default_session(),os.path.join('./training/pretrained_weights/recon_net','FaceReconModel.ckpt'))
+    saver_resnet.restore(tf.get_default_session(),os.path.join('./training/pretrained_weights/recon_net','FaceReconModel'))
     saver_facerec.restore(tf.get_default_session(),'./training/pretrained_weights/id_net/model-20170512-110547.ckpt-250000')
     saver_id.restore(tf.get_default_session(),'./vae/weights/id/stage1_epoch_395.ckpt')
     saver_exp.restore(tf.get_default_session(),'./vae/weights/exp/stage1_epoch_395.ckpt')
