@@ -62,8 +62,8 @@ The training code of our model are mainly borrowed from [StyleGAN](https://githu
 1. Clone the repository:
 
 ```
-git clone https://github.com/microsoft/DisentangledFaceGAN.git
-cd DisentangledFaceGAN
+git clone https://github.com/microsoft/DiscoFaceGAN.git
+cd DiscoFaceGAN
 ```
 2. Generate images using pre-trained network:
 
