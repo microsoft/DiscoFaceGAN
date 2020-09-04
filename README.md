@@ -1,4 +1,4 @@
-## *DiscoFaceGAN*: Disentangled and Controllable Face Image Generation via 3D Imitative-Contrastive Learning ##
+## *DiscoFaceGAN*: *Dis*entangled and *Co*ntrollable Face Image Generation via 3D Imitative-Contrastive Learning ##
 
 <p align="center"> 
 <img src="/images/teaser.gif">
