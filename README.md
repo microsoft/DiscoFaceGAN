@@ -92,7 +92,8 @@ python generate_images.py --factor 3
 - [Expression Basis](https://github.com/Juyong/3DFace) provided by Guo et al.. The original BFM09 model does not handle expression variations so extra expression basis are needed. 
 - [tf_mesh_renderer](https://github.com/google/tf_mesh_renderer) provided by Genova et al.. We use the tool to render synthetic face images during training. We recommend using its [older version](https://github.com/google/tf_mesh_renderer/tree/ba27ea1798f6ee8d03ddbc52f42ab4241f9328bb) because we find its latest version unstable during our training process.
 - [Facenet](https://github.com/davidsandberg/facenet) provided by 
-Sandberg et al.. In our paper, we use a face recognition network trained with in-house face data which cannot be made publicly available due to the company policies. To make our work reproducible, we recommend using this alternative face recognition model. We use the version [20170512-110547](https://github.com/davidsandberg/facenet/blob/529c3b0b5fc8da4e0f48d2818906120f2e5687e6/README.md) trained on MS-Celeb-1M. Training process has been tested with the new model to ensure a comparable result.
+Sandberg et al. 
+In our paper, we use a network to exrtact deep face features. This network model cannot be publicly released. As an alternative, we recommend using the Facenet model. We use the version [20170512-110547](https://github.com/davidsandberg/facenet/blob/529c3b0b5fc8da4e0f48d2818906120f2e5687e6/README.md) trained on MS-Celeb-1M. Training process has been tested with this model to ensure similar results.
 - [3D face reconstruction network](https://github.com/microsoft/Deep3DFaceReconstruction). We use the network to extract identity, expression, lighting, and pose coefficients.
 - [Face parsing network](https://arxiv.org/abs/1906.01342) provided by Lin et al.. We use the network to obtain hair segmentation masks during training.
 
