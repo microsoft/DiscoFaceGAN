@@ -112,7 +112,7 @@ In our paper, we use a network to exrtact deep face features. This network model
 2. Align images and extract coefficients for VAE and GAN training:
 
 ```
-python preprocess_data.py <raw_image_path> <raw_lm_path> <save_path_for_processed_data>
+python preprocess_data.py --image_path=<raw_image_path> --lm_path=<raw_lm_path> --save_path=<save_path_for_processed_data>
 ```
 3. Convert the aligned images to multi-resolution TFRecords similar as in [StyleGAN](https://github.com/NVlabs/stylegan):
 
