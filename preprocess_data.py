@@ -12,6 +12,7 @@ from scipy.io import loadmat,savemat
 from renderer import face_decoder
 from training.networks_recon import R_Net
 from preprocess.preprocess_utils import *
+import argparse
 
 # Pretrained face reconstruction model from Deng et al. 19,
 # https://github.com/microsoft/Deep3DFaceReconstruction
