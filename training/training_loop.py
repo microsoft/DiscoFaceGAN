@@ -117,9 +117,9 @@ def training_loop(
     network_snapshot_ticks  = 10,       # How often to export network snapshots?
     save_tf_graph           = True,    # Include full TensorFlow computation graph in the tfevents file?
     save_weight_histograms  = False,    # Include weight histograms in the tfevents file?
-    resume_run_id           = 87,     # Run ID or network pkl to resume training from, None = start from scratch.
-    resume_snapshot         = 2364,     # Snapshot index to resume training from, None = autodetect.
-    resume_kimg             = 2364,      # Assumed training progress at the beginning. Affects reporting and training schedule.
+    resume_run_id           = None,     # Run ID or network pkl to resume training from, None = start from scratch.
+    resume_snapshot         = None,     # Snapshot index to resume training from, None = autodetect.
+    resume_kimg             = 0.0,      # Assumed training progress at the beginning. Affects reporting and training schedule.
     resume_time             = 0.0,
     **_kwargs):     # Assumed wallclock time at the beginning. Affects reporting.
 
