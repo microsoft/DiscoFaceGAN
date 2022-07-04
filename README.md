@@ -159,7 +159,7 @@ python generate_images.py --model <your_model_path.pkl>
 We have trained the model using a configuration of 4 Tesla P100 GPUs. It takes 6d 15h for stage 1 and 5d 8h for stage 2.
 
 ## Contact
-If you have any questions, please contact Yu Deng (t-yudeng@microsoft.com) and Jiaolong Yang (jiaoyan@microsoft.com)
+If you have any questions, please contact Yu Deng (dengyu2008@hotmail.com) and Jiaolong Yang (jiaoyan@microsoft.com)
 
 ## License
 
